@@ -26,9 +26,10 @@ public class UserController {
 //        model.addAttribute("email", user.getEmail());
         if (errors.hasErrors()) {
             return "user/add";
-        } else if (!user.getPassword().equals(user.getVerify())) {
-            errors.rejectValue("verify", "password.mismatch", "Passwords do not match");
-            return "user/add";
+            // COMMENTED OUT BECAUSE OF THE BONUS MISSION
+//        } else if (!user.getPassword().equals(user.getVerify())) {
+//            errors.rejectValue("verify", "password.mismatch", "Passwords do not match");
+//            return "user/add";
         } else {
             return "user/index";
         }

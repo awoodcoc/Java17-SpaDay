@@ -2,6 +2,7 @@ package org.launchcode.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class User {
@@ -18,6 +19,7 @@ public class User {
     private String password;
 
     @NotBlank(message = "Please retype your password to verify.")
+    @NotNull(message = "Cannot be null.")
     private String verify;
 
     public User() {
@@ -54,10 +56,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        checkPassword();
     }
 
     public String getVerify() {
         return verify;
+    }
+
+    public void setVerify(String verify) {
+        this.verify = verify;
+        checkPassword();
+    }
+
+
+    // ADDED BECAUSE OF THE BONUS MISSION
+    private void checkPassword() {
+        if (!(verify == null) && !(password == null) && !(verify.equals(password))) {
+            verify = null;
+        }
     }
 
 }
